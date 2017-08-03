@@ -10,7 +10,7 @@ turtle.setup(SIZE_X, SIZE_Y)
 turtle.penup()
 
 SQUARE_SIZE = 20
-START_LENGTH = 7
+START_LENGTH = 1
 
 pos_list = []
 stamp_list = []
@@ -118,14 +118,39 @@ def move_snake():
     old_stamp = stamp_list.pop(0)
     snake.clearstamp(old_stamp)
     
+
     global food_stamps, food_pos
+
+    if not snake.pos() in food_pos:
+        food_ind=food_pos.index(snake.pos())
+        food.clearstamp(food_stamps[food_ind])
+        food_pos.pop(food_ind)
+        food_stamps.pop(food_ind)   
+    elif snake.pos() in food_pos:
+        food_ind=food_pos.index(snake.pos())
+        food.clearstamp(food_stamps[food_ind])
+        food_pos.pop(food_ind)
+        food_stamps.pop(food_ind)
+        print ("You have eaten the food!")
+        make_food()
+    else:
+        food.clearstamp(food_stamps[food_ind])
+        food_pos.pop(food_ind)
+        food_stamps.pop(food_ind)
+        print ("You have eaten the food!")
+        make_food()
+
+        
+
     if snake.pos() in food_pos:
         food_ind=food_pos.index(snake.pos())
         food.clearstamp(food_stamps[food_ind])
 
+
         food_pos.pop(food_ind)
         food_stamps.pop(food_ind)
         print("You have eaten the food!")
+
 
         make_food()
     pos_list.pop(0)
@@ -157,11 +182,6 @@ move_snake()
 turtle.register_shape("trash.gif")
 food = turtle.clone()
 food.shape("trash.gif")
-
-def grow():
-    if pos_list[-1] == food_pos [-1]:
-        START_LENGTH + START_LENGTH +10
-        print("You Grow!")###food disapears sometimes!!
 
 ##food_pos = [(100, 100), (-100, 100), (-100, -100), (100, -100)]
 food_stamps = []
