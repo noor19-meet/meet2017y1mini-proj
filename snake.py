@@ -95,7 +95,7 @@ def make_food():
     food_pos.append(food.pos())
     stamp = food.stamp()
     food_stamps.append(stamp)
-    
+
    
 def move_snake():
     my_pos = snake.pos()
@@ -147,6 +147,9 @@ def move_snake():
         print("You hit the down edge! Game Over!!")
         quit()
 
+    if new_pos in pos_list [0:-1]:
+        print("You ate Yourself!")
+        quit()
 
     turtle.ontimer(move_snake,TIME_STEP)
 move_snake()
@@ -154,6 +157,11 @@ move_snake()
 turtle.register_shape("trash.gif")
 food = turtle.clone()
 food.shape("trash.gif")
+
+def grow():
+    if pos_list[-1] == food_pos [-1]:
+        START_LENGTH + START_LENGTH +10
+        print("You Grow!")###food disapears sometimes!!
 
 ##food_pos = [(100, 100), (-100, 100), (-100, -100), (100, -100)]
 food_stamps = []
@@ -167,4 +175,6 @@ for this_food_pos in food_pos:
 food.hideturtle()
 
 make_food()
-
+#coyg
+#foys
+#soad
